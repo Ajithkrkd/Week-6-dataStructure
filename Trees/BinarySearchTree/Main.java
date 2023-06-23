@@ -1,12 +1,14 @@
+
 public class Main {
     public static void main(String[] args) {
         BinarySearchTree tree = new BinarySearchTree();
-        tree.insert(6);
-        tree.insert(7);
-        tree.insert(4);
-        tree.insert(1);
-        tree.insert(6);
-        tree.insert(2);
-        tree.display();
+        // int[] arr = new int[] { 15, 8, 9, 6, 20, 23, 19 };
+        // tree.populate(arr);
+        // tree.inOrderTraversal();
+        // System.out.println();
+        // tree.preOrderTraversal();
+        // System.out.println();
+        // tree.postOrderTraversal();
+
     }
 }

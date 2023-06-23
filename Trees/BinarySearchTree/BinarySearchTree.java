@@ -67,6 +67,65 @@ public class BinarySearchTree {
             node.right = insert(value, node.right);
         }
 
+        node.height = Math.max(height(node.left), height(node.right)) + 1;
         return node;
+    }
+
+    public boolean isbalanced() {
+        return isbalanced(root);
+    }
+
+    public boolean isbalanced(Node node) {
+        if (node == null) {
+            return true;
+        }
+        return Math.abs(height(node.left) - height(node.right)) <= 1 && isbalanced(node.left) && isbalanced(node.right);
+    }
+
+    public void populate(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            insert(arr[i]);
+        }
+    }
+
+    public void preOrderTraversal() {
+        preOrderTraversal(root);
+    }
+
+    private void preOrderTraversal(Node node) {
+        if (node == null) {
+            return;
+        }
+        System.out.print(node.value + " ");
+        preOrderTraversal(node.left);
+        preOrderTraversal(node.right);
+    }
+
+    public void inOrderTraversal() {
+        inOrderTraversal(root);
+
+    }
+
+    private void inOrderTraversal(Node node) {
+        if (node == null) {
+            return;
+        }
+        inOrderTraversal(node.left);
+        System.out.print(node.value + " ");
+        inOrderTraversal(node.right);
+    }
+
+    public void postOrderTraversal() {
+        postOrderTraversal(root);
+
+    }
+
+    private void postOrderTraversal(Node node) {
+        if (node == null) {
+            return;
+        }
+        inOrderTraversal(node.left);
+        inOrderTraversal(node.right);
+        System.out.print(node.value + " ");
     }
 }
