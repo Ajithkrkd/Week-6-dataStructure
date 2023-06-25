@@ -1,3 +1,4 @@
+package BinarySearchTree;
 public class BinarySearchTree {
 
     private class Node {
@@ -93,12 +94,12 @@ public class BinarySearchTree {
     }
 
     private void preOrderTraversal(Node node) {
-        if (node == null) {
-            return;
+        if (node != null) {
+            System.out.print(node.value + " ");
+            preOrderTraversal(node.left);
+            preOrderTraversal(node.right);
         }
-        System.out.print(node.value + " ");
-        preOrderTraversal(node.left);
-        preOrderTraversal(node.right);
+
     }
 
     public void inOrderTraversal() {
@@ -107,25 +108,101 @@ public class BinarySearchTree {
     }
 
     private void inOrderTraversal(Node node) {
-        if (node == null) {
-            return;
+        if (node != null) {
+            inOrderTraversal(node.left);
+            System.out.print(node.value + " ");
+            inOrderTraversal(node.right);
         }
-        inOrderTraversal(node.left);
-        System.out.print(node.value + " ");
-        inOrderTraversal(node.right);
     }
 
     public void postOrderTraversal() {
         postOrderTraversal(root);
-
     }
 
     private void postOrderTraversal(Node node) {
-        if (node == null) {
-            return;
+        if (node != null) {
+            postOrderTraversal(node.left);
+            postOrderTraversal(node.right);
+            System.out.print(node.value + " ");
+
         }
-        inOrderTraversal(node.left);
-        inOrderTraversal(node.right);
-        System.out.print(node.value + " ");
+
+    }
+
+    // this function to remove elements
+
+    public void remove(int value) {
+        removeHeleper(value, root, null);
+    }
+
+    private void removeHeleper(int value, Node currNode, Node parentNode) {
+        while (currNode != null) {
+            if (value < currNode.value) {
+                parentNode = currNode;
+                currNode = currNode.left;
+            } else if (value > currNode.value) {
+                parentNode = currNode;
+                currNode = currNode.right;
+            } else {
+                if (currNode.left != null && currNode.right != null) {
+                    currNode.value = getMinValue(currNode.right);
+                    removeHeleper(currNode.value, currNode.right, currNode);
+                } else {
+                    if (parentNode == null) {
+                        if (currNode.right == null) {
+                            root = currNode.left;
+                        } else {
+                            root = currNode.right;
+                        }
+                    }
+                    // parent is not null
+                    else {
+                        // the element is in the left tree of parent node
+                        if (parentNode.left == currNode) {
+                            if (currNode.right == null) {
+                                parentNode.left = currNode.left;
+                            } else {
+                                parentNode.left = currNode.right;
+                            }
+                        }
+                        // the element is in the right tree of parent node
+                        else {
+                            if (currNode.right == null) {
+                                parentNode.right = currNode.left;
+                            } else {
+                                parentNode.right = currNode.right;
+                            }
+                        }
+                    }
+                }
+                break;
+            }
+
+        }
+    }
+
+    public int getMinValue(Node currNode) {
+        if (currNode.left == null) {
+            return currNode.value;
+        } else {
+
+            return getMinValue(currNode.left);
+        }
+
+    }
+
+    // for check if a value is present in the tree
+    public boolean contain(int value) {
+        Node currNode = root;
+        while (currNode != null) {
+            if (value < currNode.value) {
+                currNode = currNode.left;
+            } else if (value > currNode.value) {
+                currNode = currNode.right;
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 }
