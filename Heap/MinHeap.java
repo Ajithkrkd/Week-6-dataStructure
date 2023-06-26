@@ -1,4 +1,5 @@
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -141,7 +142,7 @@ public class MinHeap {
         List<Integer> array = new ArrayList<>(Arrays.asList(6, 2, 8));
         MinHeap heap1 = new MinHeap(array);
 
-        heap1.insert(23);
+        heap1.insert(78);
         heap1.display();
     }
 
