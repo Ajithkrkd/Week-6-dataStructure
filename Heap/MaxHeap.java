@@ -64,14 +64,18 @@ public class MaxHeap {
         }
     }
 
-    public void removeElement() {
+    public int removeElement() {
+        int removed;
         if (!heap.isEmpty()) {
             Collections.swap(heap, 0, heap.size() - 1);
-            heap.remove(heap.size() - 1);
+            
+           removed = heap.remove(heap.size() - 1);
             shifDown(0);
+            return removed;
         } else {
             System.out.println("empty heap");
         }
+        return -1;
     }
 
     public void insert(int value) {
@@ -96,10 +100,36 @@ public class MaxHeap {
     private int getRightChild(int i) {
         return (i * 2) + 2;
     }
+    
 
+  //__________________________________________________
+  public List <Integer> heapSort(List<Integer> array){
+    buildHeap(array);
+    heapify();
+
+    return array;
+    
+  }
+  public void heapify() {
+        if (!heap.isEmpty()) {
+            Collections.swap(heap, 0, heap.size() - 1);
+            shifDown(0);
+            
+        } else {
+            System.out.println("empty heap");
+        }
+        
+    }
+     
+    
     public static void main(String[] args) {
-        List<Integer> array = new ArrayList<>(Arrays.asList());
-        MaxHeap heap = new MaxHeap(array);
+        List<Integer> array = new ArrayList<>(Arrays.asList(5, 3, 8, 4, 2, 9, 1, 6, 7));
+        MaxHeap heap1 = new MaxHeap();
+        heap1.heapSort(array);
+        heap1.display();
+
+        
+        // System.out.println(heap1.removeElement());
 
     }
 
